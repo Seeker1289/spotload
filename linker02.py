@@ -34,7 +34,7 @@ while True:
 
     print(f"Collected so far: {len(collected_links)}")
 
-    # Scroll a bit (NOT full jump)
+    # Scroll slowly
     driver.execute_script("""
         arguments[0].scrollTop += arguments[0].offsetHeight;
     """, scrollable)
