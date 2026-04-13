@@ -1,2 +1,6 @@
-# spotload
-download spotify songs from youtube
+
+# Spotload
+
+### Required:
+
+Install selenium, requests, ytmusicapi modules for python.
