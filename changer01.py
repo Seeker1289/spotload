@@ -3,45 +3,65 @@ from ytmusicapi import YTMusic
 
 yt = YTMusic()
 
-with open("notFound.txt", "r") as file:
+def entity(x):
+    x = x.replace("&quot;", '"')
+    x = x.replace("&#x27;", "'")
+    return x
+
+with open("links.txt", "r") as file:
     links = file.readlines()
 
-with open("nfslinks.txt", "w", encoding="utf-8") as out1:
-    with open("nfvlinks.txt", "w", encoding="utf-8") as out2:
-        for url in links:
-            url = url.strip()
-            html = requests.get(url).text
+notFound = []
 
-            start = html.find('property="og:title" content="')
-            if start != -1:
-                start += len('property="og:title" content="')
-                end = html.find('"', start)
-                song_name = html[start:end]
+with open("ytlinks.txt", "w", encoding="utf-8") as out:
+    for url in links:
+        url = url.strip()
+        html = requests.get(url).text
 
-            start = html.find('property="og:description" content="')
-            if start != -1:
-                start += len('property="og:description" content="')
-                end = html.find('"', start)
-                desc = html[start:end]
-                if "·" in desc:
-                    artist = desc.split("·")[0].strip()
+        start = html.find('property="og:title" content="')
+        if start != -1:
+            start += len('property="og:title" content="')
+            end = html.find('"', start)
+            song_name = html[start:end]
 
-                song = f"{song_name} - {artist}\n"
-                print("Saved:", song_name, artist)
-
-                search = yt.search(song.strip(), filter = "songs")
-                if search:
-                    out1.write(f"https://music.youtube.com/watch?v={search[0]['videoId']}\n")
-                    print("searched")
+        start = html.find('property="og:description" content="')
+        if start != -1:
+            start += len('property="og:description" content="')
+            end = html.find('"', start)
+            desc = html[start:end]
+            if "·" in desc:
+                artist = desc.split("·")[0].strip()
+                
+                n = song_name.find("(From")
+                if n != -1:
+                    n = song_name.find("[From")
+                    if n != -1:
+                        song_name = song_name[0:n-1]
+                        
+            song_name = entity(song_name)
+            song = f"{song_name} - {artist}"
+            #print(f"Saved: {song_name}, {artist}")
+            search = yt.search(song.strip(), filter = "songs")
+            
+            if search:
+                ytsong = search[0]['title']
+                if song_name.lower() in ytsong.lower():
+                    print(f"{song} in songs")
+                    out.write(f"song https://music.youtube.com/watch?v={search[0]['videoId']}\n")
                 else:
-                    print("Not present in songs")
+                    search = yt.search(song.strip(), filter = "videos")
+                    if search:
+                        ytsong = search[0]['title']
+                    if song_name.lower() in ytsong.lower():
+                        print(f"{song} in videos")
+                        out.write(f"video https://music.youtube.com/watch?v={search[0]['videoId']}\n")
+                    else:
+                        print(f"{song} not found")
+                        notFound.append(url)
+            
+        else:
+            print("failed")
 
-                search = yt.search(song.strip(), filter = "videos")
-                if search:
-                    out2.write(f"https://music.youtube.com/watch?v={search[0]['videoId']}\n")
-                    print("searched")
-                else:
-                    print("Not present in vids")
-
-            else:
-                print("Failed:", url)
+with open("notFound.txt", "w", encoding="utf-8") as out:
+    for i in notFound:
+        out.write(f"{i}\n")
