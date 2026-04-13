@@ -1,5 +1,4 @@
 #!/bin/bash
-
 for word in $(cat ytlinks.txt); do
 	if [[ $word == "song" ]]; then
 		path="$1/songs"
