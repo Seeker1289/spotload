@@ -1,6 +1,5 @@
 import requests
 from ytmusicapi import YTMusic
-
 yt = YTMusic()
 
 def entity(x):
