@@ -3,7 +3,8 @@
 
 ### Step 1:
 
-Install selenium, requests, ytmusicapi modules for python.
+Install selenium, requests, ytmusicapi modules for python.<br>
+Also add an environment variable for python (for windows)
 
 ### Step 2:
 
