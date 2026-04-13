@@ -27,7 +27,7 @@ Run changer01.py
 
 ### Step 6:
 
-Run the example_bash.sh or example_bat.bat like<br>**\<program> \</full/path/to/directory/where/you/want/to/download>**
+Run the example_bash.sh or example_bat.bat like<br>**./example_bash.sh \</full/path/to/directory/where/you/want/to/download>**
 
 ### Step 7:
 
