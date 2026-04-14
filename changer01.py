@@ -10,7 +10,8 @@ def entity(x):
 with open("links.txt", "r") as file:
     links = file.readlines()
 
-notFound = []
+nfs = []
+nfv = []
 
 with open("ytlinks.txt", "w", encoding="utf-8") as out:
     for url in links:
@@ -40,27 +41,33 @@ with open("ytlinks.txt", "w", encoding="utf-8") as out:
             song_name = entity(song_name)
             song = f"{song_name} - {artist}"
             #print(f"Saved: {song_name}, {artist}")
-            search = yt.search(song.strip(), filter = "songs")
+            search1 = yt.search(song.strip(), filter = "songs")
             
             if search:
-                ytsong = search[0]['title']
+                ytsong1 = search1[0]['title']
                 if song_name.lower() in ytsong.lower():
                     print(f"{song} in songs")
                     out.write(f"song https://music.youtube.com/watch?v={search[0]['videoId']}\n")
                 else:
-                    search = yt.search(song.strip(), filter = "videos")
+                    search2 = yt.search(song.strip(), filter = "videos")
                     if search:
-                        ytsong = search[0]['title']
+                        ytsong2 = search2[0]['title']
                     if song_name.lower() in ytsong.lower():
                         print(f"{song} in videos")
                         out.write(f"video https://music.youtube.com/watch?v={search[0]['videoId']}\n")
                     else:
                         print(f"{song} not found")
-                        notFound.append(url)
+                        nfs.append(ytsong1)
+                        nfv.append(ytsong2)
             
         else:
             print("failed")
 
-with open("notFound.txt", "w", encoding="utf-8") as out:
-    for i in notFound:
+with open("nfslinks.txt", "w", encoding="utf-8") as out:
+    for i in nfs:
         out.write(f"{i}\n")
+
+with open("nfvlinks.txt", "w", encoding="utf-8") as out:
+    for i in nfv:
+        out.write(f"{i}\n")
+
