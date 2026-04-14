@@ -30,8 +30,8 @@ Run changer01.py
 ### Step 6:
 
 Run the example_bash.sh or example_bat.bat like<br>
-**./example_bash.sh /home/username/Music**<br>
-**example_bat.bat C:\Users\username\Music**
+**./example_bash.sh /home/username/Music/path/to/directory**<br>
+**example_bat.bat C:\Users\username\Music\path\to\directory**
 
 ### Step 7:
 
