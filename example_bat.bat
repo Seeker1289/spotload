@@ -23,7 +23,7 @@ for /f "usebackq tokens=*" %%L in ("nfslinks.txt") do (
 
 for /f "usebackq tokens=*" %%L in ("nfvlinks.txt") do (
     for %%w in (%%L) do (
-        python yt-dlp -x %%w -P "%~1\videos\nf"
+        yt-dlp -x %%w -P "%~1\videos\nf"
     )
 )
 
