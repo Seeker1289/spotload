@@ -8,7 +8,8 @@ Also add an environment variable for python (for windows)
 
 ### Step 2:
 
-Download linker01.py, linker02.py, changer01.py and yt-dlp from https://github.com/yt-dlp/yt-dlp
+Download linker01.py, linker02.py and changer01.py<br>
+From https://github.com/yt-dlp/yt-dlp download yt-dlp (for linux) or yt-dlp.exe (for windows)
 
 ### Step 3:
 
@@ -28,7 +29,9 @@ Run changer01.py
 
 ### Step 6:
 
-Run the example_bash.sh or example_bat.bat like<br>**./example_bash.sh \</full/path/to/directory/where/you/want/to/download>**
+Run the example_bash.sh or example_bat.bat like<br>
+**./example_bash.sh /home/username/Music**<br>
+**example_bat.bat C:\Users\username\Music**
 
 ### Step 7:
 
